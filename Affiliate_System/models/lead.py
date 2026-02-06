@@ -1,0 +1,15 @@
+from sqlalchemy import Column, String, DateTime, ForeignKey
+from database import Base
+from datetime import datetime
+import uuid
+
+class Lead(Base):
+    __tablename__ = "leads"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    affiliate_id = Column(String, ForeignKey("affiliates.id"))
+    first_name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
